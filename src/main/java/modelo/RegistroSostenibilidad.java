@@ -17,9 +17,19 @@ public class RegistroSostenibilidad {
         this.accionesRealizadas = accionesRealizadas;
     }
 
-    public Date getFecha() { return fecha; }
-    public void setFecha(Date fecha) { this.fecha = fecha; }
+    public Date getFecha() {
+        return fecha;
+    }
 
-    public List<Integer> getAccionesRealizadas() { return accionesRealizadas; }
-    public void setAccionesRealizadas(List<Integer> accionesRealizadas) { this.accionesRealizadas = accionesRealizadas; }
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public List<Integer> getAccionesRealizadas() {
+        return accionesRealizadas;
+    }
+
+    public void setAccionesRealizadas(List<Integer> accionesRealizadas) {
+        this.accionesRealizadas = accionesRealizadas;
+    }
 }
