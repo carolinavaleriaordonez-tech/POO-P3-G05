@@ -15,6 +15,10 @@ public class Carta {
 
 
     public Carta() {
+        this.id = 0;
+        this.contenido = "";
+        this.visible = false;
+        this.emparejada = false;
 
     }
 
