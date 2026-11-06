@@ -3,15 +3,10 @@ package modelo;
 
 
 public class Carta {
-
     private int id;
-
     private String contenido;
-
     private boolean visible;
-
     private boolean emparejada;
-
 
 
     public Carta() {
@@ -27,11 +22,8 @@ public class Carta {
     public Carta(int id, String contenido) {
 
         this.id = id;
-
         this.contenido = contenido;
-
         this.visible = false;
-
         this.emparejada = false;
 
     }
@@ -43,17 +35,14 @@ public class Carta {
     public void setId(int id) { this.id = id; }
 
 
-
     public String getContenido() { return contenido; }
 
     public void setContenido(String contenido) { this.contenido = contenido; }
 
 
-
     public boolean isVisible() { return visible; }
 
     public void setVisible(boolean visible) { this.visible = visible; }
-
 
 
     public boolean isEmparejada() { return emparejada; }
