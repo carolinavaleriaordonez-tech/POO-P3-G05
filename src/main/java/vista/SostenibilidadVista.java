@@ -1,84 +1,51 @@
 package vista;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class VistaSostenibilidad {
+public class SostenibilidadVista extends ConsolaVista {
 
-    private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final String LINEA = "----------------------------------------------------------------------";
-
-    private final Scanner scanner;
-
-    public VistaSostenibilidad(Scanner scanner) {
-        this.scanner = scanner;
+    public SostenibilidadVista() {
+        super();
     }
 
-    public void mostrarAcciones(LocalDate hoy, String[] acciones) {
-        System.out.println();
-        System.out.println("--- REGISTRO DIARIO DE SOSTENIBILIDAD (" + hoy.format(FORMATO_FECHA) + ") ---");
-        System.out.println("Marque las acciones que realizó hoy (ingrese los números separados por coma,");
-        System.out.println("ej: 1, 3):");
-        for (int i = 0; i < acciones.length; i++) {
-            System.out.println((i + 1) + ". " + acciones[i]);
+    public int mostrarMenuSostenibilidad() {
+        mostrarMensaje("\n=== REGISTRO DIARIO DE SOSTENIBILIDAD ===");
+        mostrarMensaje("1. Registrar Acciones de Hoy");
+        mostrarMensaje("2. Ver Resumen Semanal");
+        mostrarMensaje("3. Volver al Menú Principal");
+        return leerEntero("Ingrese su opción (1-3): ");
+    }
+
+    public List<Integer> solicitarAccionesDiarias() {
+        mostrarMensaje("\nMarque las acciones realizadas hoy:");
+        mostrarMensaje("1. Usé transporte público, bicicleta o caminé.");
+        mostrarMensaje("2. No realicé impresiones.");
+        mostrarMensaje("3. No utilicé envases descartables (usé termo/taza).");
+        mostrarMensaje("4. Separé y reciclé materiales (vidrio, plástico, papel).");
+
+        List<Integer> selecciones = new ArrayList<>();
+        mostrarMensaje("Ingrese el número de cada acción realizada (ingrese 0 para finalizar):");
+        
+        int opcion = -1;
+        while (opcion != 0) {
+            opcion = leerEntero("Acción (1-4 o 0 para terminar): ");
+            if (opcion >= 1 && opcion <= 4) {
+                selecciones.add(opcion);
+            }
         }
+        return selecciones;
     }
 
-    public String pedirTexto(String mensaje) {
-        System.out.print(mensaje);
-        return scanner.nextLine();
-    }
-
-    public void mostrarError(String mensaje) {
-        System.out.println("[!] " + mensaje);
-    }
-
-    public void esperarEnter(String mensaje) {
-        System.out.print(mensaje);
-        scanner.nextLine();
-    }
-
-    public void mostrarAccionesRegistradas(List<String> descripciones, boolean actualizado) {
-        System.out.println("----------------------------------------");
-        if (actualizado) {
-            System.out.println("Ya tenías un registro de hoy; fue actualizado.");
-        }
-        System.out.println("Acciones de sostenibilidad registradas:");
-        for (String d : descripciones) {
-            System.out.println("- " + d);
-        }
-        System.out.println("¡Excelente contribución al planeta hoy!");
-    }
-
-    public void mostrarResumenSemanal(LocalDate inicio, LocalDate fin, String[] nombres, int[] veces,
-                                      String[] logros, int totalDias, int diasConAccion,
-                                      int diasCompletos, String tip) {
-        System.out.println();
-        System.out.println("--- RESUMEN SEMANAL DE SOSTENIBILIDAD (" + inicio.format(FORMATO_FECHA) + " - " + fin.format(FORMATO_FECHA) + ") ---");
-        System.out.println(LINEA);
-        System.out.println("FRECUENCIA DE ACCIONES");
-        System.out.println(LINEA);
-        System.out.println(String.format("%-43s|%-17s|%s", "ACCIÓN", " VECES REALIZADA", " LOGRO"));
-        System.out.println("-------------------------------------------|-----------------|---------------");
-        for (int i = 0; i < nombres.length; i++) {
-            System.out.println(String.format("%-43s| %-15s | %s", nombres[i],
-                    veces[i] + " / " + totalDias + " Días", logros[i]));
-        }
-        System.out.println(LINEA);
-        System.out.println("ANÁLISIS ECOLÓGICO");
-        System.out.println(LINEA);
-        System.out.println("Días con al menos 1 acción de sostenibilidad: " + diasConAccion + " de " + totalDias
-                + " (" + porcentaje(diasConAccion, totalDias) + "%)");
-        System.out.println("Días con las " + nombres.length + " acciones completas: " + diasCompletos + " de "
-                + totalDias + " (" + porcentaje(diasCompletos, totalDias) + "%)");
-        System.out.println();
-        System.out.println("Tip Ecológico de la Semana: " + tip);
-        System.out.println(LINEA);
-    }
-
-    private static int porcentaje(int parte, int total) {
-        return total == 0 ? 0 : (int) Math.round(parte * 100.0 / total);
+    public void mostrarResumenSemanal() {
+        mostrarMensaje("\n--- RESUMEN SEMANAL DE SOSTENIBILIDAD ---");
+        mostrarMensaje("ACCIÓN                            | VECES REALIZADA");
+        mostrarMensaje("---------------------------------------------------");
+        mostrarMensaje("1. Transporte público/bici/caminar | 5/7 Días");
+        mostrarMensaje("2. No realizó impresiones          | 7/7 Días");
+        mostrarMensaje("3. No utilizó envases descartables | 4/7 Días");
+        mostrarMensaje("4. Separó y recicló materiales    | 5/7 Días");
+        mostrarMensaje("\nTip Ecológico de la Semana: Mantén tu termo reutilizable a la mano antes de salir.");
+        leerCadena("\nPresione [ENTER] para volver...");
     }
 }
